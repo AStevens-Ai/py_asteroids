@@ -10,6 +10,7 @@ class Player(CircleShape):
 
         self.rotation = 0
         self.timer = 0
+        self.velocity = pygame.Vector2(0, 0) * 0.8
     
     # in the player class
     def triangle(self):
@@ -47,7 +48,8 @@ class Player(CircleShape):
 
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
-        self.position += forward * PLAYER_SPEED * dt
+        self.sliding_factor = min(0.8 - 0.01 * dt, 0.2)
+        self.position += forward * PLAYER_SPEED * dt * (1 - self.sliding_factor)
 
     def shoot(self):
         if self.timer < 0:

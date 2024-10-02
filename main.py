@@ -44,7 +44,11 @@ def main():
                 return
         delta = clock.tick(60)
         dt = delta / 1000
-        
+        fps = round(1 / dt)
+        font = pygame.font.Font(None, 36)
+        fps_text = font.render(f"FPS: {fps}", True, (255, 255,255))
+        screen.blit(fps_text, (1180, 10))
+
         for update in updatable:
             update.update(dt)
         for asteroid in asteroids:
